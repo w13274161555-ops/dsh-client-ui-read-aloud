@@ -63,7 +63,9 @@ if (-not [string]::IsNullOrWhiteSpace($Message)) {
 }
 
 $env:GIT_TERMINAL_PROMPT = '0'
-& $Git -C $Repo push $Remote main:main
+# git writes progress to stderr; merge it so PowerShell does not treat a
+# successful push as a failed command.
+& $Git -C $Repo push $Remote main:main 2>&1 | ForEach-Object { Write-Host $_ }
 if ($LASTEXITCODE -ne 0) { throw 'push failed' }
 
 Write-Host ''
