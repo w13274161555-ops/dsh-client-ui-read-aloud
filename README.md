@@ -18,7 +18,7 @@
 在 DSH 里让 Agent 执行：
 
 ```
-帮我装这个插件：github:你的用户名/dsh-client-ui-read-aloud
+帮我装这个插件：github:w13274161555-ops/dsh-client-ui-read-aloud
 ```
 
 或者手动：
@@ -27,7 +27,7 @@
 cd $env:DSH_HOME\profiles\desktop
 
 # 1. 加依赖
-pnpm add github:<你的用户名>/dsh-client-ui-read-aloud
+pnpm add github:w13274161555-ops/dsh-client-ui-read-aloud
 
 # 2. 把包名加进 dsh.profile.bundles
 #    编辑 package.json，在 "bundles" 数组里加一行：
