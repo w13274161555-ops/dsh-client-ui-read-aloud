@@ -63,10 +63,15 @@ if (-not [string]::IsNullOrWhiteSpace($Message)) {
 }
 
 $env:GIT_TERMINAL_PROMPT = '0'
-# git writes progress to stderr; merge it so PowerShell does not treat a
-# successful push as a failed command.
-& $Git -C $Repo push $Remote main:main 2>&1 | ForEach-Object { Write-Host $_ }
-if ($LASTEXITCODE -ne 0) { throw 'push failed' }
+# Run git as a child process and capture both streams through a file, so its
+# stderr progress output is not mistaken for a PowerShell error.
+$log = Join-Path $env:TEMP 'read-aloud-push.log'
+$proc = Start-Process -FilePath $Git -ArgumentList @('-C', $Repo, 'push', $Remote, 'main:main') `
+    -NoNewWindow -Wait -PassThru -RedirectStandardError $log -RedirectStandardOutput "$log.out"
+if (Test-Path $log)     { Get-Content $log     | Where-Object { $_.Trim() } | ForEach-Object { Write-Host $_ } }
+if (Test-Path "$log.out") { Get-Content "$log.out" | Where-Object { $_.Trim() } | ForEach-Object { Write-Host $_ } }
+Remove-Item $log, "$log.out" -Force -ErrorAction SilentlyContinue
+if ($proc.ExitCode -ne 0) { throw "push failed (exit $($proc.ExitCode))" }
 
 Write-Host ''
 Write-Host 'published to https://github.com/w13274161555-ops/dsh-client-ui-read-aloud' -ForegroundColor Green
