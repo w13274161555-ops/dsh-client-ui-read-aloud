@@ -1,0 +1,14 @@
+# Dependencies are installed by the consumer, not committed.
+node_modules/
+
+# Package-manager and build leftovers.
+*.log
+package-lock.json
+pnpm-lock.yaml
+
+# Editor and OS noise.
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+.DS_Store

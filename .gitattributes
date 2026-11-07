@@ -1,0 +1,9 @@
+# Normalize to LF in the repository so the package behaves identically on
+# Windows, macOS, and Linux checkouts.
+* text=auto eol=lf
+
+# Binary assets keep their bytes.
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary

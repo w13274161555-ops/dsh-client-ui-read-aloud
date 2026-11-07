@@ -1,0 +1,7 @@
+# Read-aloud bundle patch: adds the read-aloud plugin to the composition.
+#
+# Installing this package is enough - the row below is applied automatically,
+# so no manual profile editing is needed on any machine.
+- insert:
+    - id: ui-read-aloud
+      name: 'dsh-client-ui-read-aloud'

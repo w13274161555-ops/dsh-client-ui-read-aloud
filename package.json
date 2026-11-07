@@ -1,0 +1,54 @@
+{
+  "name": "dsh-client-ui-read-aloud",
+  "version": "1.0.0",
+  "description": "朗读按钮：把每条回复用神经语音念出来，带自动朗读开关和 7 个中文音色",
+  "type": "module",
+  "main": "lib/index.js",
+  "icon": "./icon.svg",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "icon.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-chat",
+        "@deepseek-ai/dsh-client-ui-renderer"
+      ]
+    }
+  },
+  "keywords": [
+    "dsh",
+    "dsh-bundle",
+    "dsh-plugin",
+    "tts",
+    "read-aloud",
+    "accessibility"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "msedge-tts": "^2.1.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
